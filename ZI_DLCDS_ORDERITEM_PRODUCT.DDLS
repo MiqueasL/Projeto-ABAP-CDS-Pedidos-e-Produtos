@@ -1,0 +1,25 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Composite - Item Pedido com Produto'
+@Metadata.ignorePropagatedAnnotations: true
+define view entity ZI_DLCDS_ORDERITEM_PRODUCT
+  as select from zdlcdst_order_it
+  association [1..1] to ZI_CDS_PRODUCT as _Product on $projection.Product = _Product.Product
+{
+  key sales_order       as SalesOrder,
+  key sales_order_item  as SalesOrderItem,
+      product           as Product,
+      _Product.Description,
+      @Semantics.quantity.unitOfMeasure: 'ProductUnity'
+      product_quantity  as ProductQuantity,
+      product_unity     as ProductUnity,
+      @Semantics.amount.currencyCode: 'Currency'
+      total_value       as TotalValue,
+      currency          as Currency,
+      creation_date     as CreationDate,
+      creation_user     as CreationUser,
+      last_changed_by   as LastChangedBy,
+      last_changed_from as LastChangedFrom,
+
+      _Product
+}
