@@ -1,0 +1,21 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Basic - Itens Pedido'
+@Metadata.ignorePropagatedAnnotations: true
+define view entity ZI_CDS_ORDER
+  as select from zdlcdst_order_it
+{
+  key sales_order       as SalesOrder,
+  key sales_order_item  as SalesOrderItem,
+      product           as Product,
+      @Semantics.quantity.unitOfMeasure: 'ProductUnity'
+      product_quantity  as ProductQuantity,
+      product_unity     as ProductUnity,
+      @Semantics.amount.currencyCode: 'Currency'
+      total_value       as TotalValue,
+      currency          as Currency,
+      creation_date     as CreationDate,
+      creation_user     as CreationUser,
+      last_changed_by   as LastChangedBy,
+      last_changed_from as LastChangedFrom
+}
