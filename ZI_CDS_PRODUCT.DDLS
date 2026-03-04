@@ -1,18 +1,14 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'Comsumption - Porduto'
+@EndUserText.label: 'Basic - Product'
 @Metadata.ignorePropagatedAnnotations: true
-define root view entity ZC_CDS_PRODUCT
-  as projection on ZI_CDS_PRODUCT
+
+define view entity ZI_CDS_PRODUCT
+  as select from zdlcdst_product
 {
-      @EndUserText.label: 'Produto'
-      @UI.lineItem: [{ position: 10 }]
-      @UI.selectionField: [{ position : 10 }]
-  key Product,
-      ProductType,
-      Description,
-      AuthorizationGroup,
-      CreationDataTime,
-      Produto,
-      Produto_2,
-      Usuario
+  key product             as Product,
+      product_type        as ProductType,
+      description         as Description,
+      authorization_group as AuthorizationGroup,
+      creation_data_time  as CreationDataTime,
 }
